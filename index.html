@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derek cumple 1 añito 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde1: #c8e6c0;
+    --verde2: #a5d6a7;
+    --verde3: #81c784;
+    --verde4: #4caf50;
+    --verde-dark: #2e7d32;
+    --verde-pale: #e8f5e9;
+    --crema: #fafdf7;
+    --amarillo: #fff9c4;
+    --dorado: #f9a825;
+    --marron: #5d4037;
+    --blanco: #ffffff;
+    --sombra: rgba(46,125,50,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--crema);
+    color: var(--marron);
+    overflow-x: hidden;
+  }
+
+  /* ===== SPLASH SCREEN ===== */
+  #splash {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, #1b5e20 0%, #2e7d32 40%, #388e3c 70%, #1b5e20 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  #splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(165,214,167,0.08) 0%, transparent 50%);
+  }
+
+  .splash-leaves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .leaf {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.15;
+    animation: leafFloat 6s ease-in-out infinite;
+  }
+  .leaf:nth-child(1)  { top:5%;  left:5%;  font-size:3rem;   animation-delay:0s;   }
+  .leaf:nth-child(2)  { top:10%; right:8%; font-size:2rem;   animation-delay:1s;   }
+  .leaf:nth-child(3)  { top:30%; left:2%;  font-size:2.5rem; animation-delay:2s;   }
+  .leaf:nth-child(4)  { top:60%; right:3%; font-size:3.5rem; animation-delay:0.5s; }
+  .leaf:nth-child(5)  { top:80%; left:10%; font-size:2rem;   animation-delay:3s;   }
+  .leaf:nth-child(6)  { top:45%; right:15%;font-size:2.5rem; animation-delay:1.5s; }
+  .leaf:nth-child(7)  { top:85%; right:20%;font-size:2rem;   animation-delay:2.5s; }
+  .leaf:nth-child(8)  { top:20%; left:40%; font-size:1.5rem; animation-delay:4s;   }
+  .leaf:nth-child(9)  { top:70%; left:50%; font-size:2rem;   animation-delay:0.8s; }
+  .leaf:nth-child(10) { top:50%; left:80%; font-size:1.8rem; animation-delay:3.5s; }
+
+  @keyframes leafFloat {
+    0%,100% { transform: translateY(0) rotate(0deg);   }
+    50%      { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  .splash-envelope {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: envelopePulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+  }
+  @keyframes envelopePulse {
+    0%,100% { transform: scale(1);    }
+    50%      { transform: scale(1.08); }
+  }
+
+  .splash-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    color: var(--verde1);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .splash-sub {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    color: rgba(200,230,192,0.75);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .splash-btn {
+    background: linear-gradient(135deg, var(--verde2), var(--verde3));
+    color: var(--verde-dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    animation: btnGlow 2.5s ease-in-out infinite;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: transform 0.2s;
+  }
+  .splash-btn:hover  { transform: scale(1.05); }
+  .splash-btn:active { transform: scale(0.97); }
+
+  @keyframes btnGlow {
+    0%,100% { box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+    50%      { box-shadow: 0 8px 35px rgba(129,199,132,0.5); }
+  }
+
+  .splash-paw {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 1.5rem;
+    opacity: 0.3;
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  #main {
+    display: none;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  @keyframes fadeInUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0);    }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(175deg, #1b5e20 0%, #2e7d32 35%, #388e3c 65%, #c8e6c0 100%);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero-leaves-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    font-size: 3rem;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(200,230,192,0.4);
+    color: var(--verde1);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-animal {
+    font-size: clamp(3.5rem, 12vw, 6rem);
+    margin-bottom: 0.5rem;
+    animation: animalBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  }
+  @keyframes animalBounce {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-8px) rotate(2deg); }
+  }
+
+  .hero-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    color: var(--blanco);
+    line-height: 1.1;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-age {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    color: var(--verde1);
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .hero-divider span { font-size: 1.2rem; }
+  .hero-divider-line {
+    width: 60px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(200,230,192,0.6), transparent);
+  }
+
+  .hero-date-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(200,230,192,0.25);
+    border-radius: 20px;
+    padding: 1.2rem 2rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .hero-date-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--verde1);
+    font-size: 0.9rem;
+  }
+  .hero-date-row .icon { font-size: 1rem; }
+  .hero-date-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--blanco);
+    font-weight: 700;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 3rem 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    color: var(--verde-dark);
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+  .section-subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #7cb880;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .divider-leaf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.8rem;
+    color: var(--verde3);
+    font-size: 1.1rem;
+  }
+  .divider-leaf-line {
+    width: 50px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--verde3));
+  }
+  .divider-leaf-line.right {
+    background: linear-gradient(90deg, var(--verde3), transparent);
+  }
+
+  /* ===== COUNTDOWN ===== */
+  .countdown-bg {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    border: 2px solid var(--verde2);
+    border-radius: 24px;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--sombra);
+  }
+
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .countdown-item {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 1rem 0.5rem;
+    box-shadow: 0 2px 12px var(--sombra);
+    border: 1.5px solid var(--verde2);
+  }
+
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    color: var(--verde-dark);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+    color: #7cb880;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  .countdown-done {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--verde-dark);
+    padding: 1rem 0;
+    display: none;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .gallery-item {
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    box-shadow: 0 4px 16px var(--sombra);
+    border: 3px solid var(--blanco);
+    outline: 1.5px solid var(--verde2);
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/9;
+  }
+  .gallery-item:hover { transform: scale(1.02); }
+
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== MAP ===== */
+  .map-container {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px var(--sombra);
+    border: 3px solid var(--verde2);
+    margin-bottom: 1.2rem;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 280px;
+    border: none;
+    display: block;
+  }
+
+  .map-salon {
+    background: var(--verde-pale);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid var(--verde2);
+  }
+  .map-salon-icon { font-size: 1.8rem; }
+  .map-salon-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--verde-dark);
+    margin-bottom: 0.2rem;
+  }
+  .map-salon-info p {
+    font-size: 0.82rem;
+    color: #5d7a5f;
+    line-height: 1.4;
+  }
+
+  .btn-gps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, var(--verde3), var(--verde4));
+    color: var(--blanco);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(76,175,80,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-gps:hover  { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(76,175,80,0.45); }
+  .btn-gps:active { transform: scale(0.97); }
+
+  /* ===== RSVP ===== */
+  .rsvp-bg {
+    background: linear-gradient(135deg, #e8f5e9, #f9fbe7);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    border: 2px solid var(--verde2);
+    box-shadow: 0 4px 20px var(--sombra);
+  }
+
+  .rsvp-input {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    border: 1.5px solid var(--verde2);
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--marron);
+    background: var(--blanco);
+    margin-bottom: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .rsvp-input:focus {
+    border-color: var(--verde4);
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.12);
+  }
+
+  .rsvp-radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .rsvp-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--blanco);
+    border: 1.5px solid var(--verde2);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .rsvp-radio-label:has(input:checked) {
+    background: var(--verde-pale);
+    border-color: var(--verde4);
+    color: var(--verde-dark);
+    font-weight: 700;
+  }
+  .rsvp-radio-label input { display:none; }
+
+  .btn-rsvp {
+    width: 100%;
+    background: linear-gradient(135deg, var(--verde3), var(--verde4));
+    color: var(--blanco);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(76,175,80,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+    margin-top: 0.4rem;
+  }
+  .btn-rsvp:hover  { transform: translateY(-2px); }
+  .btn-rsvp:active { transform: scale(0.97); }
+
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+  .rsvp-success-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+  .rsvp-success h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--verde-dark);
+    margin-bottom: 0.4rem;
+  }
+  .rsvp-success p { font-size: 0.88rem; color: #5d7a5f; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    color: var(--verde1);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '🌿🦁🌴🐾🦒🌿';
+    position: absolute;
+    top: 0.5rem; left: 0; right: 0;
+    text-align: center;
+    font-size: 1.2rem;
+    opacity: 0.2;
+    letter-spacing: 0.5rem;
+  }
+  footer p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  footer small { font-size: 0.72rem; opacity: 0.6; letter-spacing: 0.05em; }
+
+  /* ===== SEPARATORS ===== */
+  .jungle-sep {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+    color: var(--verde3);
+    padding: 0.5rem 0;
+    opacity: 0.6;
+  }
+
+  /* ===== LIGHTBOX ===== */
+  #lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 8888;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img {
+    max-width: 100%;
+    max-height: 90svh;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(255,255,255,0.15);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; }
+  }
+
+  @media (max-width: 360px) {
+    .countdown-num { font-size: 1.3rem; }
+    .countdown-label { font-size: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SPLASH ===== -->
+<div id="splash" onclick="openInvite()">
+  <div class="splash-leaves">
+    <span class="leaf">🌿</span><span class="leaf">🍃</span>
+    <span class="leaf">🌴</span><span class="leaf">🌿</span>
+    <span class="leaf">🍀</span><span class="leaf">🌱</span>
+    <span class="leaf">🍃</span><span class="leaf">🌿</span>
+    <span class="leaf">🌴</span><span class="leaf">🍃</span>
+  </div>
+
+  <div class="splash-envelope">💌</div>
+  <p class="splash-title">¡Tienes una<br>invitación especial!</p>
+  <p class="splash-sub">Tocá para abrirla 🌿</p>
+  <button class="splash-btn" onclick="openInvite()">
+    <span>🐾</span> Abrir invitación
+  </button>
+  <div class="splash-paw">🐾 🦁 🐾</div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-leaves-top">
+      <span>🌿</span><span>🌴</span><span>🌿</span>
+    </div>
+    <div class="hero-badge">🌿 Safari · Selva Mágica 🌿</div>
+    <div class="hero-animal">🦁</div>
+    <h1 class="hero-name">Derek</h1>
+    <p class="hero-age">¡Cumple su primer añito! 🎉</p>
+
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span>🐾</span>
+      <div class="hero-divider-line"></div>
+    </div>
+
+    <div class="hero-date-card">
+      <div class="hero-date-row">
+        <span class="icon">📅</span>
+        <span class="hero-date-main">Sábado 11 de Julio, 2026</span>
+      </div>
+      <div class="hero-date-row">
+        <span class="icon">🕐</span>
+        <span>13:00 hs a 16:00 hs</span>
+      </div>
+      <div class="hero-date-row">
+        <span class="icon">🏡</span>
+        <span>Salón La Ochava</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <section>
+    <div class="countdown-bg">
+      <p class="section-title">⏳ Cuenta regresiva</p>
+      <p class="section-subtitle">¡La aventura está por comenzar!</p>
+      <div class="countdown-grid" id="countdown-grid">
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-days">--</div>
+          <div class="countdown-label">Días</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-hours">--</div>
+          <div class="countdown-label">Horas</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-mins">--</div>
+          <div class="countdown-label">Minutos</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-secs">--</div>
+          <div class="countdown-label">Segundos</div>
+        </div>
+      </div>
+      <div class="countdown-done" id="countdown-done">🎉 ¡Hoy es el gran día! 🦁</div>
+    </div>
+  </section>
+
+  <div class="jungle-sep">🌿 🦒 🐾 🦁 🐾 🦒 🌿</div>
+
+  <!-- GALLERY -->
+  <section>
+    <p class="section-title">📸 Galería de Derek</p>
+    <div class="divider-leaf">
+      <div class="divider-leaf-line"></div>
+      <span>🌿</span>
+      <div class="divider-leaf-line right"></div>
+    </div>
+    <div class="gallery-grid" id="gallery">
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://i.ibb.co/rjdYw6D/DSC0357.jpg" alt="Derek" loading="lazy">
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://i.ibb.co/2153ByZV/DSC0026.jpg" alt="Derek" loading="lazy">
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://i.ibb.co/ch9RQTjc/DSC0034.jpg" alt="Derek" loading="lazy">
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://i.ibb.co/vCyMz9Sp/DSC0069.jpg" alt="Derek" loading="lazy">
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://i.ibb.co/pjqC7D6w/DSC0155.jpg" alt="Derek" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="jungle-sep">🌴 🐘 🌿 🐊 🌿 🐘 🌴</div>
+
+  <!-- MAP -->
+  <section>
+    <p class="section-title">📍 ¿Dónde festejamos?</p>
+    <div class="divider-leaf">
+      <div class="divider-leaf-line"></div>
+      <span>🗺️</span>
+      <div class="divider-leaf-line right"></div>
+    </div>
+
+    <div class="map-salon">
+      <span class="map-salon-icon">🏡</span>
+      <div class="map-salon-info">
+        <h3>Salón La Ochava</h3>
+        <p>Av. Luro 5393, B1757<br>Gregorio de Laferrere, Provincia de Buenos Aires</p>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <iframe
+        src="https://maps.google.com/maps?q=-34.74355735199529,-58.59469176798173&z=17&output=embed&hl=es&t=m"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa Salón La Ochava">
+      </iframe>
+    </div>
+
+    <a class="btn-gps" href="#" onclick="goToGPS(event)">
+      <span>🧭</span> ¡Cómo llegar desde mi ubicación!
+    </a>
+  </section>
+
+  <div class="jungle-sep">🌿 🦁 🐾 🌴 🐾 🦁 🌿</div>
+
+  <!-- RSVP -->
+  <section>
+    <p class="section-title">🎟️ Confirmá tu asistencia</p>
+    <div class="divider-leaf">
+      <div class="divider-leaf-line"></div>
+      <span>💌</span>
+      <div class="divider-leaf-line right"></div>
+    </div>
+
+    <div class="rsvp-bg">
+      <div id="rsvp-form">
+        <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Tu nombre completo 🌿" maxlength="60">
+        <input class="rsvp-input" type="number" id="rsvp-guests" placeholder="¿Cuántos asistentes? 🐾" min="1" max="10">
+
+        <div class="rsvp-radio-group">
+          <label class="rsvp-radio-label">
+            <input type="radio" name="rsvp-attend" value="si" id="rsvp-yes">
+            <span>✅ ¡Voy!</span>
+          </label>
+          <label class="rsvp-radio-label">
+            <input type="radio" name="rsvp-attend" value="no" id="rsvp-no">
+            <span>😢 No puedo</span>
+          </label>
+        </div>
+
+        <input class="rsvp-input" type="text" id="rsvp-msg" placeholder="Mensaje para los papás (opcional) 💬" maxlength="150">
+
+        <button class="btn-rsvp" onclick="submitRSVP()">
+          🦁 ¡Confirmar asistencia!
+        </button>
+      </div>
+
+      <div class="rsvp-success" id="rsvp-success">
+        <div class="rsvp-success-icon">🎉</div>
+        <h3 id="rsvp-success-title">¡Gracias!</h3>
+        <p id="rsvp-success-msg">Te esperamos en la selva de Derek 🌿</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Con amor para Derek 🦁🌿</p>
+    <p style="font-family:'Nunito';font-size:0.85rem;opacity:0.7;margin-top:0.4rem;">
+      11 de Julio · La Ochava · Laferrere
+    </p>
+    <small>Invitación digital · Nova Invite ✨</small>
+  </footer>
+
+</div><!-- /#main -->
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Foto de Derek">
+</div>
+
+<script>
+  /* === SPLASH === */
+  function openInvite() {
+    document.getElementById('splash').style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    document.getElementById('splash').style.opacity = '0';
+    document.getElementById('splash').style.transform = 'scale(1.05)';
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      startCountdown();
+    }, 600);
+  }
+
+  /* === COUNTDOWN === */
+  const EVENT_DATE = new Date('2026-07-11T13:00:00-03:00');
+
+  function startCountdown() {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = EVENT_DATE - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown-grid').style.display = 'none';
+      document.getElementById('countdown-done').style.display = 'block';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+
+  /* === GPS === */
+  function goToGPS(e) {
+    e.preventDefault();
+    const dest = '-34.74355735199529,-58.59469176798173';
+    const label = encodeURIComponent('Salón La Ochava - Cumpleaños de Derek');
+
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location.href = `maps://maps.apple.com/?daddr=${dest}&dirflg=d`;
+      setTimeout(() => {
+        window.location.href = `https://maps.google.com/?daddr=${dest}&directionsmode=driving`;
+      }, 1000);
+    } else {
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`, '_blank');
+    }
+  }
+
+  /* === LIGHTBOX === */
+  function openLightbox(el) {
+    const src = el.querySelector('img').src;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  /* === RSVP === */
+  function submitRSVP() {
+    const name   = document.getElementById('rsvp-name').value.trim();
+    const guests = document.getElementById('rsvp-guests').value.trim();
+    const attend = document.querySelector('input[name="rsvp-attend"]:checked');
+    const msg    = document.getElementById('rsvp-msg').value.trim();
+
+    if (!name) {
+      alert('Por favor ingresá tu nombre 🌿');
+      document.getElementById('rsvp-name').focus();
+      return;
+    }
+    if (!attend) {
+      alert('Por favor indicá si vas a asistir 🐾');
+      return;
+    }
+
+    const isGoing = attend.value === 'si';
+
+    document.getElementById('rsvp-form').style.display = 'none';
+    const success = document.getElementById('rsvp-success');
+    const title   = document.getElementById('rsvp-success-title');
+    const subMsg  = document.getElementById('rsvp-success-msg');
+
+    if (isGoing) {
+      title.textContent  = `¡${name}! 🎉`;
+      subMsg.textContent = `¡Los esperamos${guests ? ' (' + guests + ' personas)' : ''}! Nos vemos en la selva de Derek 🦁🌿`;
+    } else {
+      title.textContent  = `¡Gracias, ${name}!`;
+      subMsg.textContent = `Lamentamos que no puedas venir 😢 Mandamos muchos abrazos desde la selva 🌿`;
+    }
+
+    success.style.display = 'block';
+
+    /* Genera link de WhatsApp a los papás con la confirmación */
+    const waNumber = '5491169204541';
+    const waText = encodeURIComponent(
+      `Hola! Soy ${name}.\n` +
+      (isGoing
+        ? `✅ Confirmo asistencia al cumple de Derek${guests ? ' (' + guests + ' personas)' : ''}! 🦁🎉`
+        : `😢 Lamentablemente no voy a poder ir al cumple de Derek.`) +
+      (msg ? `\n\n💬 "${msg}"` : '')
+    );
+
+    setTimeout(() => {
+      const waDiv = document.createElement('div');
+      waDiv.style.cssText = 'margin-top:1rem;text-align:center';
+      waDiv.innerHTML = `<a href="https://wa.me/${waNumber}?text=${waText}"
+        style="display:inline-flex;align-items:center;gap:0.5rem;background:#25d366;color:#fff;
+               font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;
+               padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;
+               box-shadow:0 4px 14px rgba(37,211,102,0.3)">
+        <span>📲</span> Enviar confirmación por WhatsApp
+      </a>`;
+      success.appendChild(waDiv);
+    }, 300);
+  }
+</script>
+</body>
+</html>
